@@ -14,7 +14,7 @@ namespace Daemon{
 	class DaemonManager{
 		private:
 			shared_ptr<RunnableLanucher> _runLanu;
-			static Usage _res;
+			Usage _res;
 			int retVal;
 			string gcc_compiler;
 			string gcc_options;
@@ -26,18 +26,18 @@ namespace Daemon{
 				gcc_compiler="g++";
 				gcc_options="-lm -DONLINE_JUDGE";
 			}
-			int compile(string compiler,string compilerOptions){
-				int compileStatus=std::system((compiler+" "+compilerOptions).c_str());	
-				if(compileStatus==0){
+			int compile(string compiler,string compilerOptions,string srcFile){
+				int compileStatus=std::system((compiler+" "+compilerOptions+" "+srcFile).c_str());	
+				if(compileStatus!=0){
 					cerr<<"Compile error!"<<endl;
 				}
 				return compileStatus;
 			}
-			void addRunnbleLanucher(string run,string inData,string outData){
+			void addRunnableLanucher(string run,string inData,string outData){
 				_runLanu=(shared_ptr<RunnableLanucher>)new RunnableLanucher(run,inData,outData);
 			}
 			void run(){
-				if(_runLanu==NULL){
+				if(!_runLanu){
 					cerr<<"Error Runnable Lanucher is not added!"<<endl;
 				}
 				else{

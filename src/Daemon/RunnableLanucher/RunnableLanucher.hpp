@@ -61,14 +61,17 @@ namespace Daemon{
 				int vmSize=0;
 				int tmpSize=0;
 				while(!isExecDone){
-					if(tCnt>200){
+					if(tCnt>500){
 						cout<<"TLE ie. extends 8secs!"<<endl;
+						break;
 					}
-					if((tmpSize=get_proc_status(getpid(),"VmSize"))>memLimit){
+					if((tmpSize=get_proc_status(getpid(),"VmHWM"))>memLimit){
 						cout<<"MLE ie. extends 32MB!"<<endl;
+						break;
 					}
 					if(vmSize<tmpSize)vmSize=tmpSize;
 					nanosleep(&t16m,&tres);
+					tCnt++;
 				}
 				cout<<"Time Usage is "<<16*tCnt<<"ms"<<endl;
 				cout<<"Mem Usage is "<<vmSize<<"KB"<<endl;
