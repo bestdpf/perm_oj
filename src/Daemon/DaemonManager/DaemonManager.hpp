@@ -2,8 +2,8 @@
 #define _DAEMON_MANAGER
 
 #include<iostream>
-#include<../RunnableLanucher.hpp>
-#include<boost/shared_ptr>
+#include"../RunnableLanucher/RunnableLanucher.hpp"
+#include<boost/shared_ptr.hpp>
 #include<unistd.h>
 #include<stdlib.h>
 #include<errno.h>
@@ -16,23 +16,25 @@ namespace Daemon{
 			shared_ptr<RunnableLanucher> _runLanu;
 			static Usage _res;
 			int retVal;
-			const string gcc_compiler="g++";
-			const string gcc_options="-lm -DONLINE_JUDGE"
+			string gcc_compiler;
+			string gcc_options;
 		public:
 			DaemonManager(){
-				_runLanu=NULL;
+				_runLanu=shared_ptr<RunnableLanucher>();
 				_res=Usage(0,0);
 				retVal=0;
+				gcc_compiler="g++";
+				gcc_options="-lm -DONLINE_JUDGE";
 			}
 			int compile(string compiler,string compilerOptions){
-				int compileStatus=system((compiler+" "+compilerOptions).c_str());	
+				int compileStatus=std::system((compiler+" "+compilerOptions).c_str());	
 				if(compileStatus==0){
 					cerr<<"Compile error!"<<endl;
 				}
 				return compileStatus;
 			}
 			void addRunnbleLanucher(string run,string inData,string outData){
-				_runLanu=new RunnableLanucher(run,inData,outData);
+				_runLanu=(shared_ptr<RunnableLanucher>)new RunnableLanucher(run,inData,outData);
 			}
 			void run(){
 				if(_runLanu==NULL){
