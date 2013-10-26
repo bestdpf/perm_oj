@@ -1,0 +1,2 @@
+0.0.6 by pengfeituan
+change some error in ResponseHandler.hpp, now we can receive file using http post method
