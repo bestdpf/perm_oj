@@ -1,3 +1,7 @@
+10.26/2013 23:11 0.0.8 by pengfeituan
+add XMLHandler, now it can read write xml files,and
+can get vaules from xml files, but some useful features need to be added in
+the future
 10/26/2013 20:55 0.0.7 by pengfeituan
 add libcurl support interface, now one can send xml file easily
 10/26/2013 17:02 0.0.6 by pengfeituan
