@@ -58,10 +58,7 @@ namespace Daemon{
 				  "<html><body>An internal server error has occured.</body></html>";
 				fileexistspage =
 				  "<html><body>This file already exists.</body></html>";
-				daemon= MHD_start_daemon(MHD_USE_SELECT_INTERNALLY,PORT,NULL,NULL,
-						&answer_to_connection,NULL,
-						MHD_OPTION_NOTIFY_COMPLETED,request_completed,
-						NULL,MHD_OPTION_END);
+				
 			}
 			~ResponseHandler(){
 				free(daemon);
@@ -239,12 +236,15 @@ namespace Daemon{
 			}
 
 			static void startUp(){
-				if(NULL==daemon){
-					cerr<<"ResponseHandler is not init!"<<endl;
+				if(NULL!=daemon){
+					cerr<<"ResponseHandler is already starting!"<<endl;
 				}
 				else{
 					cout<<"starting up ResponseHandler"<<endl;
-					MHD_stop_daemon(daemon);
+					daemon= MHD_start_daemon(MHD_USE_SELECT_INTERNALLY,PORT,NULL,NULL,
+					&answer_to_connection,NULL,
+					MHD_OPTION_NOTIFY_COMPLETED,request_completed,
+					NULL,MHD_OPTION_END);
 					while(true){
 						sleep(100);
 					}
@@ -252,5 +252,12 @@ namespace Daemon{
 			}
 			
 	};//end of class ResponseHandler
+	const unsigned int ResponseHandler::_port;
+	const int ResponseHandler::_max_clients;
+	const int ResponseHandler::_GET;
+	const int ResponseHandler::_POST;
+	unsigned int ResponseHandler::nr_of_uploading_clients;
+	struct MHD_Daemon *ResponseHandler::daemon;
+	const char* ResponseHandler::askpage,*ResponseHandler::busypage,*ResponseHandler::completepage,*ResponseHandler::errorpage,*ResponseHandler::servererrorpage,*ResponseHandler::fileexistspage; 
 }//end of Daemon namespace
 #endif
