@@ -53,7 +53,10 @@ namespace Daemon{
 				isExecDone=false;
 				string cmd=_runPath+" <"+_inPath+" >"+_outPath;
 			//	FILE* fin=popen(cmd.c_str(),"r");
-				std::system(cmd.c_str());
+				int sysret=std::system(cmd.c_str());
+				if(sysret!=0){
+					cerr<<"RE!!!"<<endl;
+				}
 				isExecDone=true;
 			}
 			void resrcThread(){

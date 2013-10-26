@@ -2,9 +2,9 @@
 #include<unistd.h>
 using namespace std;
 #define N 1024
+char str[N*N*12];
 int main(){
-	char str[N*N];
 	cout<<"Hello World!!"<<endl;
-	sleep(10);
+	sleep(7);
 	return 0;
 }
