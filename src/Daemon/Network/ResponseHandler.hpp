@@ -61,8 +61,21 @@ namespace Daemon{
 				
 			}
 			~ResponseHandler(){
+				MHD_stop_daemon(daemon);
 				free(daemon);
 				daemon=NULL;
+			}
+			static void startUp(){
+				daemon = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY, PORT, NULL, NULL,
+                             &answer_to_connection, NULL,
+                             MHD_OPTION_NOTIFY_COMPLETED, request_completed,
+                             NULL, MHD_OPTION_END);
+				  if (NULL == daemon){
+						cerr<<"error launching  requesthandler"<<endl;
+					}
+				while(true){
+					sleep(100);
+				}
 			}
 			static int
 			send_page (struct MHD_Connection *connection, const char *page,
@@ -90,7 +103,7 @@ namespace Daemon{
 				      const char *transfer_encoding, const char *data, uint64_t off,
 				      size_t size)
 			{
-			  struct connection_info_struct *con_info = (connection_info_struct *)coninfo_cls;
+			  struct connection_info_struct *con_info = (connection_info_struct*)coninfo_cls;
 			  FILE *fp;
 
 			  con_info->answerstring = servererrorpage;
@@ -233,22 +246,6 @@ namespace Daemon{
 			    }
 
 			  return send_page (connection, errorpage, MHD_HTTP_BAD_REQUEST);
-			}
-
-			static void startUp(){
-				if(NULL!=daemon){
-					cerr<<"ResponseHandler is already starting!"<<endl;
-				}
-				else{
-					cout<<"starting up ResponseHandler"<<endl;
-					daemon= MHD_start_daemon(MHD_USE_SELECT_INTERNALLY,PORT,NULL,NULL,
-					&answer_to_connection,NULL,
-					MHD_OPTION_NOTIFY_COMPLETED,request_completed,
-					NULL,MHD_OPTION_END);
-					while(true){
-						sleep(100);
-					}
-				}
 			}
 			
 	};//end of class ResponseHandler
