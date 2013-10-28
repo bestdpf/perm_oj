@@ -1,3 +1,8 @@
+10/29/2013 15:11 0.0.12 by pengfeituan
+add DaemonServer and change some error in XMLHandler, but remember that never
+use operator = in XMLHandler direct, it may cause some undefined error, and i
+don't know why, though it is written by me v_v
+now it is still to be done is that add judge ret to the DaemonServer
 10/29/2013 00:23 0.0.11 by pengfeituan
 add xml support for RequestHandler, correct an error of mem leak
 10/28/2013 13:13 0.0.10 by pengfeituan

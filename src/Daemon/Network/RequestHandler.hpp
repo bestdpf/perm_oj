@@ -23,7 +23,7 @@ namespace Daemon{
 				curl=curl_easy_init();
 				headerlist=curl_slist_append(headerlist, "Expect:");
 			}	
-			void addFile(char* filepath){
+			void addFile(const char* filepath){
 				curl_formadd(&formpost,
 							&lastptr,
 							CURLFORM_COPYNAME,"sendfile",
@@ -40,7 +40,7 @@ namespace Daemon{
 							CURLFORM_COPYCONTENTS,"send",
 							CURLFORM_END);
 			}
-			void sendFile(char* filepath,char* url){
+			void sendFile(const char* filepath,const char* url){
 				if(curl==NULL){
 					cerr<<"error RequestHandler"<<endl;
 				}

@@ -3,7 +3,8 @@
 using namespace Daemon;
 int main(){
 	cout<<"Test Daemon!!!"<<endl;
-	boost::shared_ptr<DaemonManager> dm(new DaemonManager());
+	boost::shared_ptr<DaemonManager> dm;
+	dm=shared_ptr<DaemonManager>(new DaemonManager());
 	dm->compile("g++","-lm -DONLINE_JUDGE","test.cpp");
 	dm->addRunnableLanucher("./a.out","1.in","1.out");		
 	dm->run();	

@@ -26,8 +26,8 @@ namespace Daemon{
 				gcc_compiler="g++";
 				gcc_options="-lm -DONLINE_JUDGE";
 			}
-			int compile(string compiler,string compilerOptions,string srcFile){
-				int compileStatus=std::system((compiler+" "+compilerOptions+" "+srcFile).c_str());	
+			int compile(string compiler,string compilerOptions,string srcFile,string output){
+				int compileStatus=std::system((compiler+" "+compilerOptions+" "+srcFile+" -o "+output).c_str());	
 				if(compileStatus!=0){
 					cerr<<"Compile error!"<<endl;
 				}
@@ -35,6 +35,9 @@ namespace Daemon{
 			}
 			void addRunnableLanucher(string run,string inData,string outData){
 				_runLanu=(shared_ptr<RunnableLanucher>)new RunnableLanucher(run,inData,outData);
+			}
+			Usage getRet(){
+				return _res;
 			}
 			void run(){
 				if(!_runLanu){

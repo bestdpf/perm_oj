@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<note>
-    <to>Tove</to>
-    <from>Jani</from>
-    <heading>Reminder</heading>
-    <body>Don't forget me this weekend!</body>
-</note>
+<judge>
+	<runid>1000</runid>
+	<storepath>/home/duan/workplace/judge_store/</storepath>
+	<fileprepath>1000/</fileprepath>
+	<srcname>1.cpp<srcname>
+</judge>

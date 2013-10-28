@@ -12,30 +12,38 @@ namespace Daemon{
 		private:
 			xml_document doc;
 			char buffer[256];
-			char backup[256];
+			//char backup[256];
 			size_t bf_sz;
 		public:
 			XMLHandler(){
 				bf_sz=0;
 			}
 			XMLHandler(const XMLHandler& xmlb){
+				#if _DEBUG
+				cout<<"copy constructor of XMLHandler"<<endl;
+				#endif
 				bf_sz=xmlb.bf_sz;
-				memcpy(buffer,xmlb.backup,bf_sz);
-				memcpy(backup,xmlb.backup,bf_sz);
+				memcpy(buffer,xmlb.buffer,bf_sz);
+				//memcpy(backup,xmlb.backup,bf_sz);
 				loadFromBuffer(buffer,bf_sz);
 			}
-			XMLHandler operator=(const XMLHandler& xmlb){
+			XMLHandler& operator=(const XMLHandler& xmlb){
+				if(buffer==xmlb.buffer)return *this;
+				//return *this=XMLHandler(xmlb);
+				#if _DEBUG
+				cout<<"operator = in XMLHandler"<<endl;
+				#endif
 				bf_sz=xmlb.bf_sz;
-				memcpy(buffer,xmlb.backup,bf_sz);
-				memcpy(backup,xmlb.backup,bf_sz);
+				memcpy(buffer,xmlb.buffer,bf_sz);
+				//memcpy(backup,xmlb.backup,bf_sz);
 				loadFromBuffer(buffer,bf_sz);
 				return *this;
 			}
-			void loadFromBuffer(char* src,size_t sz){
-				memcpy(buffer,src,sz);
-				memcpy(backup,src,sz);
+			void loadFromBuffer(const char* src,size_t sz){
+				if(buffer!=src)memcpy(buffer,src,sz);
+				//memcpy(backup,src,sz);
 				bf_sz=sz;
-				xml_parse_result ret=doc.load_buffer_inplace(buffer,sz);
+				xml_parse_result ret=doc.load_buffer(buffer,sz);
 				if(ret){
 #if _DEBUG
 					cout<<"Load XML from buffer Succefully!"<<endl;
@@ -44,6 +52,10 @@ namespace Daemon{
 				else{
 					cerr<<"Error Loading XML buffer"<<endl;
 				}
+			}
+			xml_node child(string chd){
+				xml_node ret=doc.child(chd.c_str());
+				return ret;
 			}
 			void loadFile(char * path){
 				xml_parse_result ret=doc.load_file(path);
@@ -56,11 +68,15 @@ namespace Daemon{
 					cerr<<"Error Loading XML File"<<endl;
 				}
 			}
-			void saveFile(char* path){
+			void saveFile(const char* path){
 #if _DEBUG
-				cout<<"Saving XML File"<<endl;
+				cout<<"Saving XML File in "<<path<<endl;
+				dump();
 #endif
 				doc.save_file(path);
+#if _DEBUG
+				cout<<"Saved file!"<<endl;
+#endif
 			}
 			void dump(xml_node xmln,int level){
 				int i;
@@ -77,9 +93,15 @@ namespace Daemon{
 						dump(*it,level+1);
 				}
 			}
-			void addChild(char * name,char* value){	
+			xml_node addChild(const char* name,const char* value){	
 				xml_node ch=doc.append_child(name);
-				ch.append_child(node_pcdata).set_value(value);
+				if(value!=NULL)ch.append_child(node_pcdata).set_value(value);
+				return ch;
+			}
+			xml_node addChildChild(const char* chd,const char* name,const char* value){
+				xml_node ch=doc.child(chd).append_child(name);
+				if(value!=NULL)ch.append_child(node_pcdata).set_value(value);
+				return ch;
 			}
 			void dump(){
 #if _DEBUG
