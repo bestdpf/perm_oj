@@ -5,6 +5,7 @@
 #include"Network/ResponseHandler.hpp"
 #include"Network/RequestHandler.hpp"
 #include"Network/XMLHandler.hpp"
+#include"Judger/Judger.hpp"
 #include"boost/thread.hpp"
 #include"boost/shared_ptr.hpp"
 #include<cstdlib>
@@ -30,6 +31,7 @@ namespace Daemon{
 			shared_ptr<DaemonManager>dm;
 			shared_ptr<ResponseHandler> rh;
 			shared_ptr<RequestHandler>rqh;
+			shared_ptr<Judger>jer;
 			struct timespec t100m,tres;
 			int runid;
 			string storepath;
@@ -73,6 +75,10 @@ namespace Daemon{
 				nd.append_child("inputtype").append_child(node_pcdata).set_value(to_string(jr.inputtype).c_str());
 				nd.append_child("time").append_child(node_pcdata).set_value(to_string(jr.usg._timeUsage).c_str());
 				nd.append_child("mem").append_child(node_pcdata).set_value(to_string(jr.usg._memUsage).c_str());
+				nd.append_child("RE").append_child(node_pcdata).set_value(to_string(jr.usg._re).c_str());
+				JudgeInfo ji=jer->getRet();
+				nd.append_child("judgercorrect").append_child(node_pcdata).set_value(to_string(ji.correct).c_str());
+				nd.append_child("judgererrtype").append_child(node_pcdata).set_value(to_string(ji.err_type).c_str());
 				#if _DEBUG
 				cout<<"getSendXML ret"<<endl;
 				xmlh.dump();
@@ -104,6 +110,9 @@ namespace Daemon{
 							dm->run();
 							jr.usg=dm->getRet();
 							jr.inputtype=1;
+							//run Judger below
+							jer=shared_ptr<Judger>(new Judger(runnablepath+"1.out"));
+							jer->run();
 						}
 						else jr.inputtype=0;
 							

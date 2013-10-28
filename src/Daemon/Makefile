@@ -1,7 +1,7 @@
 default:
 	make release
 debug: 
-	g++ -g main.cpp -lboost_thread -lpugixml -lmicrohttpd -lcurl -D_DEBUG -o debug
+	g++ -Wall -g main.cpp -lboost_thread -lpugixml -lmicrohttpd -lcurl -D_DEBUG -o debug
 release:
 	g++ main.cpp -lboost_thread -lpugixml -lmicrohttpd -lcurl -o release
 daemon:

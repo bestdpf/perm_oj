@@ -14,7 +14,8 @@ namespace Daemon{
 	struct Usage{
 		int _timeUsage;//ms
 		int _memUsage;//KB
-		Usage(int timeUse=8000,int memUse=32*1024):_timeUsage(timeUse),_memUsage(memUse){};
+		int _re;//RE, 0 is succ, 1 is RE
+		Usage(int timeUse=8000,int memUse=32*1024,int re=0):_timeUsage(timeUse),_memUsage(memUse),_re(re){};
 	};
 	class RunnableLanucher{
 		private:
@@ -55,6 +56,7 @@ namespace Daemon{
 			//	FILE* fin=popen(cmd.c_str(),"r");
 				int sysret=std::system(cmd.c_str());
 				if(sysret!=0){
+					_resrc._re=1;
 					cerr<<"RE!!!"<<endl;
 				}
 				isExecDone=true;
