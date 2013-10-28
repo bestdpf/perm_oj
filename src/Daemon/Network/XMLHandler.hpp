@@ -3,7 +3,7 @@
 #include<iostream>
 #include<pugixml.hpp>
 #include<string>
-
+#include<cstring>
 using namespace std;
 using namespace pugi;
 
@@ -11,8 +11,40 @@ namespace Daemon{
 	class XMLHandler{
 		private:
 			xml_document doc;
+			char buffer[256];
+			char backup[256];
+			size_t bf_sz;
 		public:
-			XMLHandler(){}
+			XMLHandler(){
+				bf_sz=0;
+			}
+			XMLHandler(const XMLHandler& xmlb){
+				bf_sz=xmlb.bf_sz;
+				memcpy(buffer,xmlb.backup,bf_sz);
+				memcpy(backup,xmlb.backup,bf_sz);
+				loadFromBuffer(buffer,bf_sz);
+			}
+			XMLHandler operator=(const XMLHandler& xmlb){
+				bf_sz=xmlb.bf_sz;
+				memcpy(buffer,xmlb.backup,bf_sz);
+				memcpy(backup,xmlb.backup,bf_sz);
+				loadFromBuffer(buffer,bf_sz);
+				return *this;
+			}
+			void loadFromBuffer(char* src,size_t sz){
+				memcpy(buffer,src,sz);
+				memcpy(backup,src,sz);
+				bf_sz=sz;
+				xml_parse_result ret=doc.load_buffer_inplace(buffer,sz);
+				if(ret){
+#if _DEBUG
+					cout<<"Load XML from buffer Succefully!"<<endl;
+#endif
+				}
+				else{
+					cerr<<"Error Loading XML buffer"<<endl;
+				}
+			}
 			void loadFile(char * path){
 				xml_parse_result ret=doc.load_file(path);
 				if(ret){

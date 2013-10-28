@@ -10,6 +10,9 @@
 #include<string>
 #include<unistd.h>
 #include<iostream>
+#include"XMLHandler.hpp"
+#include<queue>
+#include<algorithm>
 #define PORT            8888
 #define POSTBUFFERSIZE  512
 #define MAXCLIENTS      2
@@ -22,12 +25,29 @@ namespace Daemon{
 	{
 	  int connectiontype;
 	  struct MHD_PostProcessor *postprocessor;
-	  FILE *fp;
+	  //FILE *fp;
+	  char *bf;
+      size_t bf_sz;
 	  const char *answerstring;
 	  int answercode;
+	  connection_info_struct(){
+		bf=NULL;
+		bf_sz=0;
+		answercode=0;
+		connectiontype=0;
+		postprocessor=NULL;
+		answerstring=NULL;
+	}
+		~connection_info_struct(){
+			if(bf!=NULL){
+				delete[]bf;
+			}
+			bf_sz=0;
+		}
 	};
 	class ResponseHandler{
 		private:
+			static queue<XMLHandler> xmlq;
 			const static unsigned int _port=8888;
 			const static int _max_clients=10;
 			const static int _GET=0;
@@ -64,6 +84,16 @@ namespace Daemon{
 				MHD_stop_daemon(daemon);
 				free(daemon);
 				daemon=NULL;
+			}
+			static bool getNextXML(XMLHandler& xmlh){
+				if(xmlq.empty()){
+					return false;
+				}
+				else{
+					xmlh=xmlq.front();
+					xmlq.pop();
+					return true;
+				}
 			}
 			static void startUp(){
 				daemon = MHD_start_daemon (MHD_USE_SELECT_INTERNALLY, PORT, NULL, NULL,
@@ -104,7 +134,7 @@ namespace Daemon{
 				      size_t size)
 			{
 			  struct connection_info_struct *con_info = (connection_info_struct*)coninfo_cls;
-			  FILE *fp;
+			  //FILE *fp;
 
 			  con_info->answerstring = servererrorpage;
 			  con_info->answercode = MHD_HTTP_INTERNAL_SERVER_ERROR;
@@ -112,8 +142,9 @@ namespace Daemon{
 			  if (0 != strcmp (key, "file"))
 			    return MHD_NO;
 
-			  if (!con_info->fp)
+			  if (!con_info->bf)
 			    {
+				/*
 			      if (NULL != (fp = fopen (filename, "rb")))
 				{
 				  fclose (fp);
@@ -121,21 +152,45 @@ namespace Daemon{
 				  con_info->answercode = MHD_HTTP_FORBIDDEN;
 				  return MHD_NO;
 				}
-
 			      con_info->fp = fopen (filename, "ab");
 			      if (!con_info->fp)
 				return MHD_NO;
+				*/
 			    }
-
 			  if (size > 0)
 			    {
-			      if (!fwrite (data, size, sizeof (char), con_info->fp))
-				return MHD_NO;
+				char* old_bf=con_info->bf;
+				size_t old_bf_sz=con_info->bf_sz;
+				con_info->bf_sz+=size;
+				con_info->bf=new char[con_info->bf_sz];
+				if(old_bf!=NULL){
+					cout<<"Copy old data"<<endl;
+					memcpy(con_info->bf,old_bf,old_bf_sz);
+					delete[] old_bf;
+				}
+				cout<<"copy new data"<<endl;
+				memcpy(con_info->bf+old_bf_sz,data,size);
+			      //if (!fwrite (data, size, sizeof (char), con_info->fp))
+				//return MHD_NO;
 			    }
 
 			  con_info->answerstring = completepage;
 			  con_info->answercode = MHD_HTTP_OK;
-
+				  if (con_info->bf){
+						XMLHandler xmlh=XMLHandler();
+						xmlh.loadFromBuffer(con_info->bf,con_info->bf_sz);
+						xmlq.push(xmlh);
+					}
+					/*
+					XMLHandler testxml;
+					if(getNextXML(testxml)){
+						cout<<"succ getting xml"<<endl;
+						testxml.dump();
+					}
+					else{
+						cout<<"fail getting xml"<<endl;
+					}
+					*/
 			  return MHD_YES;
 			}
 
@@ -156,11 +211,23 @@ namespace Daemon{
 				  MHD_destroy_post_processor (con_info->postprocessor);
 				  nr_of_uploading_clients--;
 				}
-
-			      if (con_info->fp)
-				fclose (con_info->fp);
+/*
+			      if (con_info->bf){
+						XMLHandler xmlh=XMLHandler();
+						xmlh.loadFromBuffer(con_info->bf,con_info->bf_sz);
+						xmlq.push(xmlh);
+					}
+					XMLHandler testxml;
+					if(getNextXML(testxml)){
+						cout<<"succ getting xml"<<endl;
+						testxml.dump();
+					}
+					else{
+						cout<<"fail getting xml"<<endl;
+					}
+*/
 			    }
-
+			
 			  free (con_info);
 			  *con_cls = NULL;
 			}
@@ -183,7 +250,8 @@ namespace Daemon{
 			      if (NULL == con_info)
 				return MHD_NO;
 
-			      con_info->fp = NULL;
+			      con_info->bf = NULL;
+				  con_info->bf_sz=0;
 
 			      if (0 == strcmp (method, "POST"))
 				{
@@ -233,10 +301,10 @@ namespace Daemon{
 				}
 			      else
 				{
-				  if (NULL != con_info->fp)
+				  if (NULL != con_info->bf)
 				  {
-				    fclose (con_info->fp);
-				    con_info->fp = NULL;
+				    //fclose (con_info->fp);
+				    con_info->bf = NULL;
 				  }
 				  /* Now it is safe to open and inspect the file before calling send_page with a response */
 				  return send_page (connection, con_info->answerstring,
@@ -253,6 +321,7 @@ namespace Daemon{
 	const int ResponseHandler::_max_clients;
 	const int ResponseHandler::_GET;
 	const int ResponseHandler::_POST;
+	queue<XMLHandler> ResponseHandler::xmlq;
 	unsigned int ResponseHandler::nr_of_uploading_clients;
 	struct MHD_Daemon *ResponseHandler::daemon;
 	const char* ResponseHandler::askpage,*ResponseHandler::busypage,*ResponseHandler::completepage,*ResponseHandler::errorpage,*ResponseHandler::servererrorpage,*ResponseHandler::fileexistspage; 

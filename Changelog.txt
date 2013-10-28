@@ -1,3 +1,5 @@
+10/29/2013 00:23 0.0.11 by pengfeituan
+add xml support for RequestHandler, correct an error of mem leak
 10/28/2013 13:13 0.0.10 by pengfeituan
 add php curl to post file,now it is very easy to post file using php
 10/28/2013 1:30 0.0.9 by pengfeituan
