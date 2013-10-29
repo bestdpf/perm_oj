@@ -45,7 +45,7 @@ namespace Daemon{
 			DaemonServer(){
 				dm=shared_ptr<DaemonManager>(new DaemonManager());
 				rh=shared_ptr<ResponseHandler>(new ResponseHandler());
-				rqh=shared_ptr<RequestHandler>(new RequestHandler());
+				//rqh=shared_ptr<RequestHandler>(new RequestHandler());
 				t100m.tv_sec=0;
 				t100m.tv_nsec=100000000;
 				runnablepath=string("/home/duan/workplace/judge_runnable/");
@@ -76,6 +76,7 @@ namespace Daemon{
 				nd.append_child("time").append_child(node_pcdata).set_value(to_string(jr.usg._timeUsage).c_str());
 				nd.append_child("mem").append_child(node_pcdata).set_value(to_string(jr.usg._memUsage).c_str());
 				nd.append_child("RE").append_child(node_pcdata).set_value(to_string(jr.usg._re).c_str());
+				nd.append_child("outpath").append_child(node_pcdata).set_value((runnablepath+"1.out").c_str());
 				JudgeInfo ji=jer->getRet();
 				nd.append_child("judgercorrect").append_child(node_pcdata).set_value(to_string(ji.correct).c_str());
 				nd.append_child("judgererrtype").append_child(node_pcdata).set_value(to_string(ji.err_type).c_str());
@@ -123,6 +124,7 @@ namespace Daemon{
 						#endif
 						jr.sendxmlpath=runnablepath+"ret"+to_string(runid)+".xml";
 						xmlsend.saveFile(jr.sendxmlpath.c_str());
+						rqh=shared_ptr<RequestHandler>(new RequestHandler());
 						rqh->sendFile(jr.sendxmlpath.c_str(),posturl.c_str());
 					}
 					else{

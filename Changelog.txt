@@ -1,3 +1,5 @@
+10/29/2013 16:32 0.0.14 by pengfeituan
+correct an error in DaemonServer causing loops
 10/29/2013 15:56 0.0.13 by pengfeituan
 add Judger Framework, but the judge code need to be added in the future
 10/29/2013 15:11 0.0.12 by pengfeituan
