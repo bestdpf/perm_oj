@@ -15,7 +15,9 @@ namespace Daemon{
 		int _timeUsage;//ms
 		int _memUsage;//KB
 		int _re;//RE, 0 is succ, 1 is RE
-		Usage(int timeUse=8000,int memUse=32*1024,int re=0):_timeUsage(timeUse),_memUsage(memUse),_re(re){};
+		int _tle;//TLE, 0 is succ ,1 is TLE
+		int _mle;//MLE, 0 is succ ,1 is TLE
+		Usage(int timeUse=8000,int memUse=32*1024,int re=0,int tle=0,int mle=0):_timeUsage(timeUse),_memUsage(memUse),_re(re),_tle(tle),_mle(mle){};
 	};
 	class RunnableLanucher{
 		private:
@@ -67,12 +69,14 @@ namespace Daemon{
 				int tmpSize=0;
 				while(!isExecDone){
 					if(tCnt>500){
+						_resrc._tle=1;
 						cout<<"TLE ie. extends 8secs!"<<endl;
 						break;
 					}
 					tmpSize=get_proc_status(getpid(),"VmHWM");
 					if(vmSize<tmpSize)vmSize=tmpSize;
 					if((tmpSize)>memLimit){
+						_resrc._mle=1;
 						cout<<"MLE ie. extends 32MB!"<<endl;
 						break;
 					}
@@ -81,7 +85,9 @@ namespace Daemon{
 				}
 				cout<<"Time Usage is "<<16*tCnt<<"ms"<<endl;
 				cout<<"Mem Usage is "<<vmSize<<"KB"<<endl;
-				_resrc=Usage(16*tCnt,vmSize);
+				//_resrc=Usage(16*tCnt,vmSize);
+				_resrc._timeUsage=16*tCnt;
+				_resrc._memUsage=vmSize;
 				isExecDone=false;
 			}
 			

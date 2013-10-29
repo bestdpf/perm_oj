@@ -76,6 +76,8 @@ namespace Daemon{
 				nd.append_child("time").append_child(node_pcdata).set_value(to_string(jr.usg._timeUsage).c_str());
 				nd.append_child("mem").append_child(node_pcdata).set_value(to_string(jr.usg._memUsage).c_str());
 				nd.append_child("RE").append_child(node_pcdata).set_value(to_string(jr.usg._re).c_str());
+				nd.append_child("TLE").append_child(node_pcdata).set_value(to_string(jr.usg._tle).c_str());
+				nd.append_child("MLE").append_child(node_pcdata).set_value(to_string(jr.usg._mle).c_str());
 				nd.append_child("outpath").append_child(node_pcdata).set_value((runnablepath+"1.out").c_str());
 				JudgeInfo ji=jer->getRet();
 				nd.append_child("judgercorrect").append_child(node_pcdata).set_value(to_string(ji.correct).c_str());
@@ -112,8 +114,10 @@ namespace Daemon{
 							jr.usg=dm->getRet();
 							jr.inputtype=1;
 							//run Judger below
-							jer=shared_ptr<Judger>(new Judger(runnablepath+"1.out"));
-							jer->run();
+							if(jr.usg._re==0&&jr.usg._tle==0&&jr.usg._mle==0){
+								jer=shared_ptr<Judger>(new Judger(runnablepath+"1.out"));
+								jer->run();
+							}
 						}
 						else jr.inputtype=0;
 							
