@@ -13,8 +13,10 @@ namespace Daemon{
 		private:
 			string data;
 			struct JudgeInfo ji;
+			int perm_num;
 		public:
-			Judger(string outdata){
+			Judger(string outdata,int pnum=10){
+				perm_num=pnum;
 				data=outdata;
 				ji.correct=0;
 				ji.err_type=0;
