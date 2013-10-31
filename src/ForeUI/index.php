@@ -17,6 +17,7 @@
     <!-- Custom styles for this template -->
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/signin.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="{{ page.base_url }}docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -60,30 +61,32 @@
       </div>
     </div>
     
-    <div class="container">
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1 style="color: #e53333; font-style: normal; font-weight: bold;" align="center">TAES</h1>
-        <h2 style="color: #660000; font-size: 40px;" align="center">Tsinghua Algorithm Evaluation System</h2>
-        <p align="center">For fear of losing you,I would never cry </p>
-        <p align="center">And if the golden sun,Should cease to shine its light, </p>
-        <p align="center">Just one smile from you,Would make my whole world bright</p>
-      </div>
+    
+    <!-- Main component for a primary marketing message or call to action -->
+	<div class="jumbotron">
+	      <div class="container">
+	        <h1 style="color: #e53333; font-style: normal; font-weight: bold;" align="center">TAES</h1>
+        	<h2 style="color: #660000; font-size: 40px;" align="center">Tsinghua Algorithm Evaluation System</h2>
+	        <p align="center">For fear of losing you,I would never cry </p>
+	        <p align="center">And if the golden sun,Should cease to shine its light, </p>
+	        <p align="center">Just one smile from you,Would make my whole world bright</p>
+	      </div>
+    </div><!-- /container -->
 
-      <div class="container">
-			<form class="form-signin" action="main.php" method="post">
-        	<h2 class="form-signin-heading">Please sign in</h2>
-        	<input type="text" class="form-control" placeholder="Email address" required autofocus>
-        	<input type="password" class="form-control" placeholder="Password" required>
-        	<label class="checkbox">
-          		<input type="checkbox" value="remember-me" style="font-size:12px;"> Remember me
-        	</label>
-        	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      		</form>
-		</div>
-	</div> <!-- /container -->
-  
-	
+    <div class="container">
+      <form class="form-signin" action="main.php" method="post">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <input type="text" class="form-control" placeholder="Email address" required autofocus>
+          <input type="password" class="form-control" placeholder="Password" required>
+          <label class="checkbox">
+              <input type="checkbox" value="remember-me" style="font-size:12px;"> Remember me
+          </label>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <button class="btn btn-lg btn-success btn-block" type="button">Register</button>
+      </form>
+    </div><!-- /container -->
+    
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
