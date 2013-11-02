@@ -1,3 +1,16 @@
 eclipse.preferences.version=1
+encoding//src/ForeUI=UTF-8
+encoding//src/ForeUI/Application=UTF-8
+encoding//src/ForeUI/Application/Conf/config.php=UTF-8
+encoding//src/ForeUI/Application/Home=UTF-8
+encoding//src/ForeUI/Application/Home/View=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Base/common.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Index/index.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Index/main.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/body.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/footer.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/head.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/header.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/var.html=UTF-8
+encoding//src/ForeUI/Application/Home/Widget/CategoryWidget.class.php=UTF-8
 encoding//src/ForeUI/index.php=UTF-8
-encoding//src/ForeUI/main.php=UTF-8
