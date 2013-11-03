@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//src/ForeUI/Application/Conf/config.php=UTF-8
+encoding//src/ForeUI/Application/Home/Controller/HomeController.class.php=UTF-8
+encoding//src/ForeUI/Application/Home/Controller/IndexController.class.php=UTF-8
+encoding//src/ForeUI/Application/Home/Logic/BaseLogic.class.php=UTF-8
+encoding//src/ForeUI/Application/Home/Model/FileModel.class.php=UTF-8
+encoding//src/ForeUI/Application/Home/Model/MemberModel.class.php=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Base/common.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/body.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/header.html=UTF-8
+encoding//src/ForeUI/Application/Home/View/default/Public/var.html=UTF-8
+encoding//src/ForeUI/Application/User/Api/Api.class.php=UTF-8
+encoding//src/ForeUI/Application/User/Api/UserApi.class.php=UTF-8
+encoding//src/ForeUI/ThinkPHP/ThinkPHP.php=UTF-8
+encoding//src/ForeUI/index.php=UTF-8

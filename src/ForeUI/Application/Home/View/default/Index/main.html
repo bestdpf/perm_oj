@@ -57,6 +57,27 @@
               </ul>
             </li>
           </ul>
+          
+          <if condition="is_login()">
+              <ul class="nav navbar-nav navbar-right" style="margin-right:0">
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()} <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="{:U('User/profile')}" style="font-family: '微软雅黑'">修改密码</a></li>
+                          <li><a href="{:U('User/logout')}" style="font-family: '微软雅黑'">退出</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          <else/>
+              <ul class="nav navbar-nav navbar-right" style="margin-right:0">
+                  <li>
+                      <a href="{:U('User/login')}" style="font-family: '微软雅黑'">登录</a>
+                  </li>
+                  <li>
+                      <a href="{:U('User/register')}" style="padding-left:0;padding-right:0;font-family: '微软雅黑'">注册</a>
+                  </li>
+              </ul>
+          </if>
         </div><!--/.nav-collapse -->
       </div><!--container-->
     </div><!--navbar-->
@@ -67,19 +88,19 @@
             <h1 style="color: #e53333; font-style: normal;font-weight:bold;">Welcome to TAES</h1>
             <p class="lead">Built using Bootstrap</p>
             <ul class="nav nav-pills">
-              <li class="active"><a href="main.php">Home</a></li>
+              <li class="active"><a href="{:U('Index/main')}">Home</a></li>
               <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> ALGORITHM DEMO <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="demo-zd.php">字典序法</a></li>
-                        <li><a href="demo-zj.php">递增进位制法</a></li>
-                        <li><a href="demo-jj.php">递减进位制法</a></li>
-                        <li><a href="demo-lh.php">邻位对换法</a></li>
+                        <li><a href="{:U('FuncPage/demo-jd')}" style="font-family: '微软雅黑'">字典序法</a></li>
+                        <li><a href="{:U('FuncPage/demo-zj')}" style="font-family: '微软雅黑'">递增进位制法</a></li>
+                        <li><a href="{:U('FuncPage/demo-jj')}" style="font-family: '微软雅黑'">递减进位制法</a></li>
+                        <li><a href="{:U('FuncPage/demo-lh')}" style="font-family: '微软雅黑'">邻位对换法</a></li>
                     </ul>
               </li>
-              <li><a href="ranking.php">RANKING</a></li>
-              <li><a href="evaluation.php">EVALUATION</a></li>
-              <li><a href="achievement.php">ACHIEVEMENT</a></li>
+              <li><a href="{:U('FuncPage/ranking')}">RANKING</a></li>
+              <li><a href="{:U('FuncPage/evaluation')}">EVALUATION</a></li>
+              <li><a href="{:U('FuncPage/achievement')}">ACHIEVEMENT</a></li>
             </ul>
         </div>
     </header>
@@ -146,25 +167,25 @@
       <div class="row">
         <div class="col-lg-3">
           <img class="img-responsive" src="data:image/png;base64," data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Heading</h2>
+          <h2 style="font-family: '微软雅黑'">演示</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-3">
           <img class="img-responsive" src="data:image/png;base64," data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Heading</h2>
+          <h2 style="font-family: '微软雅黑'">排行</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-3">
           <img class="img-responsive" src="data:image/png;base64," data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Heading</h2>
+          <h2 style="font-family: '微软雅黑'">评测</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-3">
           <img class="img-responsive" src="data:image/png;base64," data-src="holder.js/240x240" alt="Generic placeholder image">
-          <h2>Heading</h2>
+          <h2 style="font-family: '微软雅黑'">成就</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
@@ -187,37 +208,13 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
       <!-- /END THE FEATURETTES -->
 
 
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    	<p class="text-muted credit">本站由 <a href="http://www.bootcss.com/">Bootstrap</a> 及 <a href="http://www.thinkphp.cn/">ThinkPHP</a> 强力驱动.</p>
       </footer>
 
     </div><!-- /.container -->
