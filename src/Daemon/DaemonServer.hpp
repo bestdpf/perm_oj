@@ -5,7 +5,7 @@
 #include"Network/ResponseHandler.hpp"
 #include"Network/RequestHandler.hpp"
 #include"Network/XMLHandler.hpp"
-#include"Judger/Judger.hpp"
+#include"Judger/NewJudger.hpp"
 #include"boost/thread.hpp"
 #include"boost/shared_ptr.hpp"
 #include<cstdlib>
@@ -31,7 +31,7 @@ namespace Daemon{
 			shared_ptr<DaemonManager>dm;
 			shared_ptr<ResponseHandler> rh;
 			shared_ptr<RequestHandler>rqh;
-			shared_ptr<Judger>jer;
+			shared_ptr<NewJudger>jer;
 			struct timespec t100m,tres;
 			int runid;
 			string storepath;
@@ -113,9 +113,9 @@ namespace Daemon{
 							dm->run();
 							jr.usg=dm->getRet();
 							jr.inputtype=1;
-							//run Judger below
+							//run NewJudger below
 							if(jr.usg._re==0&&jr.usg._tle==0&&jr.usg._mle==0){
-								jer=shared_ptr<Judger>(new Judger(runnablepath+"1.out"));
+								jer=shared_ptr<NewJudger>(new NewJudger(3,runnablepath+"1.out"));
 								jer->run();
 							}
 						}
