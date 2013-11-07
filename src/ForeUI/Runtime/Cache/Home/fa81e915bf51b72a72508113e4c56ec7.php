@@ -132,11 +132,11 @@
 	<p></p>
 
 	<div class="container">
-		<form class="form" method="post">
+		<form class="form" action="/perm_oj/src/ForeUI/index.php?s=/home/funcpage/upload_file" method="post" enctype="multipart/form-data">
 		  	<textarea class="form-control" rows="20"></textarea>
 		  	<div class="form-group">
 		    	<label for="exampleInputFile">File input</label>
-		    	<input type="file" id="exampleInputFile">
+		    	<input type="file" name="file" id="file" />
 			</div>
 		  	<button type="submit" class="btn btn-lg btn-primary">Submit</button>
 		</form>

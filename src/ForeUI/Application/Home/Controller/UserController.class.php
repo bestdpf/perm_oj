@@ -21,10 +21,8 @@ class UserController extends HomeController {
 		//$login = A('User/User', 'Api')->login('麦当苗儿ss', 'aoiujz');
 		//$login = A('User/User', 'Api')->register('麦当苗儿ss', 'aoiujz', 'xiaoxiaoxiao@qq.com');
 		//$login = A('User/User', 'Api')->checkEmail('zuojiazi@vip.qq.com');
-
-
 		// dump($login);
-		
+		$this->display();
 	}
 
 	/* 注册页面 */
