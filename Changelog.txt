@@ -1,3 +1,5 @@
+11/3/2013 11:11 0.0.15 by pengfeituan
+add NewJudger
 10/29/2013 16:32 0.0.14 by pengfeituan
 correct an error in DaemonServer causing loops
 add TLE and MLE support
