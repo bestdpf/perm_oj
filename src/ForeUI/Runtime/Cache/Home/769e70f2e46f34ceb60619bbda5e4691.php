@@ -67,9 +67,9 @@
 	      <div class="container">
 	        <h1 style="color: #e53333; font-style: normal; font-weight: bold;" align="center">TAES</h1>
         	<h2 style="color: #660000; font-size: 40px;" align="center">Tsinghua Algorithm Evaluation System</h2>
-	        <p align="center">For fear of losing you,I would never cry </p>
-	        <p align="center">And if the golden sun,Should cease to shine its light, </p>
-	        <p align="center">Just one smile from you,Would make my whole world bright</p>
+	        <p align="center" style="font-family: '微软雅黑'">基于Bootstrap,提供良好的用户界面及体验</p>
+	        <p align="center" style="font-family: '微软雅黑'">通过动画的演示，诠释排列生成算法过程，帮助学习</p>
+	        <p align="center" style="font-family: '微软雅黑'">提供全方位良好的算法评估及排名功能</p>
 	      </div>
     </div><!-- /container -->
 

@@ -29,7 +29,7 @@ class FuncPageController extends HomeController {
 	
 	function create_xml($runid,$store_path,$src_name)
 	{
-		$xml=new DOMDocument("1.0");
+		$xml=new \DOMDocument("1.0");
 		$xml->formatOutput=true;
 	
 		$_judge=$xml->createElement("judge");
