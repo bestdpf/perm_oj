@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+        <runid>1000</runid>
+        <compilecode>0</compilecode>
+        <inputtype>1</inputtype>
+        <time>16</time>
+        <mem>3896</mem>
+        <RE>0</RE>
+        <TLE>0</TLE>
+        <MLE>0</MLE>
+        <outpath>/home/1.out</outpath>
+        <judgercorrect>0</judgercorrect>
+        <judgererrtype>0</judgererrtype>
+</result>
