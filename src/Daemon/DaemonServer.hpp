@@ -50,7 +50,8 @@ namespace Daemon{
 				t100m.tv_nsec=100000000;
 				runnablepath=string("/home/duan/workplace/judge_runnable/");
 				inputpath=string("/home/duan/workplace/judge_input/");
-				posturl=string("http://127.0.0.1/test/recv.php");
+				//posturl=string("http://127.0.0.1/test/recv.php");
+				posturl=string("http://127.0.0.1/Application/Home/Controller/recv.php");
 			}
 			void run(){
 				thread_group tg;

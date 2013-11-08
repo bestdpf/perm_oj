@@ -239,6 +239,9 @@ namespace Daemon{
 					      const char *version, const char *upload_data,
 					      size_t *upload_data_size, void **con_cls)
 			{
+				#if _DEBUG
+				cout<<"daemon get file"<<endl;
+				#endif
 			  if (NULL == *con_cls)
 			    {
 			      struct connection_info_struct *con_info;

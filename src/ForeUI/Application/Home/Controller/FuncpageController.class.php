@@ -18,7 +18,8 @@ class FuncPageController extends HomeController {
 	}
 	function post_host($a){
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "http://127.0.0.1:9000/filepost");
+		echo "post $a now \n";
+		curl_setopt($ch, CURLOPT_URL, "http://127.0.0.1:8888/filepost");
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
@@ -44,11 +45,13 @@ class FuncPageController extends HomeController {
 		$_judge->appendChild($_src_name);
 		$xml->appendChild($_judge);
 	
-		return $xml->saveXML();
+		$xml->save("send.xml");
+		#echo \getcwd();
+		return "send.xml";
 	}
 	
 	public function check_sql(){
-		$con=mysql_connect("localhost","root","0"); //your user and password
+		$con=mysql_connect("localhost","root","6432114"); //your user and password
 		if(! $con)
 			die("could not connect：" . mysql_error());
 		if(!mysql_query("CREATE DATABASE judge",$con))
@@ -78,7 +81,7 @@ class FuncPageController extends HomeController {
 	public function insert_result(){
 		$xml = simplexml_load_file($_FILES["sendfile"]["tmp_name"]);
 		
-		$con=mysql_connect("localhost","root","0"); //your mysql user and password
+		$con=mysql_connect("localhost","root","6432114"); //your mysql user and password
 		if(! $con)
 			die("could not connect：" . mysql_error());
 		mysql_select_db("judge",$con);
@@ -130,7 +133,7 @@ class FuncPageController extends HomeController {
 			}
 			else
 			{
-				$runid=1000;
+				$runid=1001;
 				$store_path="/var/www/Test/application/Projects/temp/"; //your store path
 				$src_name=$runid . $_FILES["file"]["name"];
 				move_uploaded_file($_FILES["file"]["tmp_name"],$store_path . $src_name);
