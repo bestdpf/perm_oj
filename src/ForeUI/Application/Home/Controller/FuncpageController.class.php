@@ -136,7 +136,8 @@ class FuncPageController extends HomeController {
 				move_uploaded_file($_FILES["file"]["tmp_name"],$store_path . $src_name);
 				//echo create_xml($runid, $store_path, $src_name);
 				$this->post_host($this->create_xml($runid, $store_path, $src_name));
-				$this->success('新增成功', U('Index/test'));
+				//$this->success('新增成功', U('Index/test'));
+				$this->success('新增成功');
 			}
 		}
 		else
