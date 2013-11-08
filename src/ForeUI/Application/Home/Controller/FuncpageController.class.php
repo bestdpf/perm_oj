@@ -11,6 +11,8 @@ class FuncPageController extends HomeController {
 	
 /* 用户中心首页 */
 	public function index(){
+		$this->check_sql();
+		$this->read_lastre_from_sql();
 		$this->display();
 	
 	}
@@ -43,6 +45,76 @@ class FuncPageController extends HomeController {
 		$xml->appendChild($_judge);
 	
 		return $xml->saveXML();
+	}
+	
+	public function check_sql(){
+		$con=mysql_connect("localhost","root","0"); //your user and password
+		if(! $con)
+			die("could not connect：" . mysql_error());
+		if(!mysql_query("CREATE DATABASE judge",$con))
+			die("Could not create database judge" . mysql_error());
+		mysql_select_db("judge",$con);
+		
+		$create_judge="CREATE TABLE judge
+			(
+			  runid INT NOT NULL AUTO_INCREMENT,
+			  compilecode SMALLINT,
+			  inputtype SMALLINT,
+			  time INT,
+			  mem INT,
+			  RE SMALLINT,
+			  TLE SMALLINT,
+			  MLE SMALLINT,
+			  judgercorrect SMALLINT,
+			  judgererrtype SMALLINT,
+			  PRIMARY KEY(runid)
+			)";
+		
+		if(!mysql_query($create_judge,$con))
+			die("Could not create table judge" . mysql_error());
+		mysql_close($con);
+	}
+	
+	public function insert_result(){
+		$xml = simplexml_load_file($_FILES["sendfile"]["tmp_name"]);
+		
+		$con=mysql_connect("localhost","root","0"); //your mysql user and password
+		if(! $con)
+			die("could not connect：" . mysql_error());
+		mysql_select_db("judge",$con);
+		$insert_table="INSERT INTO judge VALUES(
+		$xml->runid,
+		$xml->compilecode,
+		$xml->inputtype,
+		$xml->time,
+		$xml->mem,
+		$xml->RE,
+		$xml->TLE,
+		$xml->MLE,
+		$xml->judgercorrect,
+		$xml->judgererrtype)";
+		if(!mysql_query($insert_table,$con))
+			echo "Could not insert into table judge" . mysql_error() ."\n";
+		/*
+		 the follow down is read from mysql
+		$result = mysql_query("SELECT * FROM judge");
+		while($row = mysql_fetch_array($result))
+		{
+		echo $row['runid'] . "\n";
+		echo $row['MLE'] . "\n";
+		}
+		*/
+		mysql_close($con);
+	}
+	
+	public function read_lastre_from_sql(){
+		$result = mysql_query("SELECT * FROM judge");
+		while($row = mysql_fetch_array($result))
+		{
+			echo $row['runid'] . "\n";
+			echo $row['MLE'] . "\n";
+		}
+		
 	}
 	
 	public function upload_file(){
