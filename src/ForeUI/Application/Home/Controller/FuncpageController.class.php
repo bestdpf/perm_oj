@@ -137,7 +137,7 @@ class FuncPageController extends HomeController {
 			}
 			else
 			{
-				$runid=1001;
+				$runid=$this->$testrunid;
 				$store_path="/var/www/Test/application/Projects/temp/"; //your store path
 				$src_name=$runid . $_FILES["file"]["name"];
 				move_uploaded_file($_FILES["file"]["tmp_name"],$store_path . $src_name);
@@ -145,6 +145,7 @@ class FuncPageController extends HomeController {
 				$this->post_host($this->create_xml($runid, $store_path, $src_name));
 				//$this->success('新增成功', U('Index/test'));
 				$this->success('新增成功');
+				$this->$test_runid++;
 			}
 		}
 		else
