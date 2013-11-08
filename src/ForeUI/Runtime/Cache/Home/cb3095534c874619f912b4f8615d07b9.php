@@ -96,7 +96,7 @@
             <p class="lead">Built using Bootstrap</p>
             <ul class="nav nav-pills">
               <li><a href="<?php echo U('Index/main');?>">Home</a></li>
-              <li class="dropdown">
+              <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> ALGORITHM DEMO <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo U('FuncPage/demo-zd');?>" style="font-family: '微软雅黑'">字典序法</a></li>
@@ -106,7 +106,7 @@
                     </ul>
               </li>
               <li><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
-              <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">EVALUATION</a></li>
+              <li><a href="<?php echo U('FuncPage/evaluation');?>">EVALUATION</a></li>
               <li><a href="<?php echo U('FuncPage/achievement');?>">ACHIEVEMENT</a></li>
             </ul>
         </div>
@@ -125,8 +125,86 @@
             </div>
         
         
-	<?php
- echo "<p>hello php body\r\n</p>"; $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge",$con); while($row = mysql_fetch_array($result)) { echo "<p>runid ". $row['runid'] . "\t"; echo "time ".$row['time'] . "\t"; echo "mem ".$row['mem']."\r\n</p>"; } ?>
+	<div class="container marketing">
+		<h1 style="font-family: '微软雅黑'">字典序法</h2>
+		<hr class="featurette-divider">
+		
+		<!-- START THE FEATURETTES -->
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">下一个排列数</h2>
+				<p class="lead">1.先找从右到左第一次出现下降的位置x.</p>
+				<p class="lead">2.找后缀中比x大的最小的数并与x进行交换.</p>
+				<p class="lead">3.将x(new)的后缀整体翻转，即得到下一个排列.</p>
+				
+			</div>
+			<div class="col-md-5">
+				<iframe src="./Animation/zd1/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+				<!-- <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image"> -->
+				
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">排列数到中介数（and 序号）</h2>
+				<p class="lead">1.从左向右扫描，找出先于此排列的排列的个数.</p>
+				<p class="lead">2.如对839647521求中介数：</p>
+				<p class="lead">***前缀先于8的排列的个数：7×8!</p>	
+				<p class="lead">***第一位是8,先于83的排列的个数：2×7!</p>	
+				<p class="lead">***前2位是83,先于839的排列的个数：6×6!</p>	
+				<p class="lead">***前3位是839,先于8396得的排列的个数：4×5! ……</p>			
+				<p class="lead">序号：7×8!+2×7!+6×6!+4×5!+2×4!+3×3!+2×2!+1×1!=297191</p>
+				<p class="lead">中介数：72642321</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到排列数</h2>
+				<p class="lead">1.从左向右按位扫描中介数xi，xi+1为对应位上的排列数.</p>
+				<p class="lead">2.如果xi+1已经在左侧出现，则再加1.</p>
+				<p class="lead">3.重复第二步直至没有在左侧找到相同的数.</p>
+				<p class="lead">4.n位的中介数对应n+1位的排列数.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">序号到中介数</h2>
+				<p class="lead">1.对于n+1位的排列数，有n位的中介数.</p>
+				<p class="lead">2.从n!开始找出满足x*n!<排列数<(x+1)*n!的最大x.</p>
+				<p class="lead">3.从中介数中减去x*n!，计算满足x*(n-1)!<排列数<(x+1)*(n-1)!的最大x.</p>
+				<p class="lead">4.重复上述步骤.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+		<div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到序号</h2>
+				<p class="lead">1.按位乘以n!、(n-1)!、(n-2)!……</p>
+				<p class="lead">2.将各项相加.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+      	<!-- /END THE FEATURETTES -->
+	</div>
+
 
     </div>
 </div>

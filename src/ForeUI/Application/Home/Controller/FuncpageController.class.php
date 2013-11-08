@@ -111,13 +111,17 @@ class FuncPageController extends HomeController {
 	}
 	
 	public function read_lastre_from_sql(){
-		$result = mysql_query("SELECT * FROM judge");
+		$con=mysql_connect("localhost","root","6432114"); //your mysql user and password
+		if(! $con)
+			die("could not connect：" . mysql_error());
+		mysql_select_db("judge",$con);
+		$result = mysql_query("SELECT * FROM judge",$con);
+		return $result;
 		while($row = mysql_fetch_array($result))
 		{
 			echo $row['runid'] . "\n";
 			echo $row['MLE'] . "\n";
 		}
-		
 	}
 	
 	public function upload_file(){

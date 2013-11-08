@@ -96,7 +96,7 @@
             <p class="lead">Built using Bootstrap</p>
             <ul class="nav nav-pills">
               <li><a href="<?php echo U('Index/main');?>">Home</a></li>
-              <li class="dropdown">
+              <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> ALGORITHM DEMO <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo U('FuncPage/demo-zd');?>" style="font-family: '微软雅黑'">字典序法</a></li>
@@ -106,7 +106,7 @@
                     </ul>
               </li>
               <li><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
-              <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">EVALUATION</a></li>
+              <li><a href="<?php echo U('FuncPage/evaluation');?>">EVALUATION</a></li>
               <li><a href="<?php echo U('FuncPage/achievement');?>">ACHIEVEMENT</a></li>
             </ul>
         </div>
@@ -125,8 +125,7 @@
             </div>
         
         
-	<?php
- echo "<p>hello php body\r\n</p>"; $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge",$con); while($row = mysql_fetch_array($result)) { echo "<p>runid ". $row['runid'] . "\t"; echo "time ".$row['time'] . "\t"; echo "mem ".$row['mem']."\r\n</p>"; } ?>
+
 
     </div>
 </div>

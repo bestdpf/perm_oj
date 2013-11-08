@@ -17,7 +17,7 @@
                     </ul>
               </li>
               <li><a href="{:U('FuncPage/ranking')}">RANKING</a></li>
-              <li class="active"><a href="{:U('FuncPage/evaluation')}">EVALUATION</a></li>
+              <li class="active"><a href="{:U('FuncPage/lastresult')}">EVALUATION</a></li>
               <li><a href="{:U('FuncPage/achievement')}">ACHIEVEMENT</a></li>
             </ul>
         </div>
@@ -25,5 +25,18 @@
 </block>
 
 <block name="body">
-
+	<?php
+	 echo "<p>hello php body\r\n</p>";
+	$con=mysql_connect("localhost","root","6432114"); //your mysql user and password
+	if(! $con)
+		die("could not connect：" . mysql_error());
+	mysql_select_db("judge",$con);
+	$result = mysql_query("SELECT * FROM judge",$con);
+	while($row = mysql_fetch_array($result))
+	{
+		echo "<p>runid ". $row['runid'] . "\t";
+		echo "time ".$row['time'] . "\t";
+		echo "mem ".$row['mem']."\r\n</p>";
+	}
+	?>
 </block>
