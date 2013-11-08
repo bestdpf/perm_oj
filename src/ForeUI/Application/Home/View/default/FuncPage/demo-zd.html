@@ -33,7 +33,10 @@
 	    <div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading" style="font-family: '微软雅黑'">下一个排列数</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				<p class="lead">1.先找从右到左第一次出现下降的位置x.</p>
+				<p class="lead">2.找后缀中比x大的最小的数并与x进行交换.</p>
+				<p class="lead">3.将x(new)的后缀整体翻转，即得到下一个排列.</p>
+				
 			</div>
 			<div class="col-md-5">
 				<iframe src="./Animation/zd1/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
@@ -46,7 +49,14 @@
 	    <div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading" style="font-family: '微软雅黑'">排列数到中介数（and 序号）</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				<p class="lead">1.从左向右扫描，找出先于此排列的排列的个数.</p>
+				<p class="lead">2.如对839647521求中介数：</p>
+				<p class="lead">***前缀先于8的排列的个数：7×8!</p>	
+				<p class="lead">***第一位是8,先于83的排列的个数：2×7!</p>	
+				<p class="lead">***前2位是83,先于839的排列的个数：6×6!</p>	
+				<p class="lead">***前3位是839,先于8396得的排列的个数：4×5! ……</p>			
+				<p class="lead">序号：7×8!+2×7!+6×6!+4×5!+2×4!+3×3!+2×2!+1×1!=297191</p>
+				<p class="lead">中介数：72642321</p>
 			</div>
 			<div class="col-md-5">
 				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
@@ -57,7 +67,10 @@
 	    <div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到排列数</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				<p class="lead">1.从左向右按位扫描中介数xi，xi+1为对应位上的排列数.</p>
+				<p class="lead">2.如果xi+1已经在左侧出现，则再加1.</p>
+				<p class="lead">3.重复第二步直至没有在左侧找到相同的数.</p>
+				<p class="lead">4.n位的中介数对应n+1位的排列数.</p>
 			</div>
 			<div class="col-md-5">
 				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
@@ -68,7 +81,10 @@
 	    <div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading" style="font-family: '微软雅黑'">序号到中介数</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				<p class="lead">1.对于n+1位的排列数，有n位的中介数.</p>
+				<p class="lead">2.从n!开始找出满足x*n!<排列数<(x+1)*n!的最大x.</p>
+				<p class="lead">3.从中介数中减去x*n!，计算满足x*(n-1)!<排列数<(x+1)*(n-1)!的最大x.</p>
+				<p class="lead">4.重复上述步骤.</p>
 			</div>
 			<div class="col-md-5">
 				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
@@ -79,7 +95,8 @@
 		<div class="row featurette">
 			<div class="col-md-7">
 				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到序号</h2>
-				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+				<p class="lead">1.按位乘以n!、(n-1)!、(n-2)!……</p>
+				<p class="lead">2.将各项相加.</p>
 			</div>
 			<div class="col-md-5">
 				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
