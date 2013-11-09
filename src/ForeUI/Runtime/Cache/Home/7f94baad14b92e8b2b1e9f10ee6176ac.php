@@ -125,8 +125,17 @@
             </div>
         
         
+<<<<<<< HEAD
+	
+	<div class="container">
+		<p></p>
+		
+	
+	</div>
+=======
 	<?php
  echo "<p>hello php body\r\n</p>"; $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge",$con); while($row = mysql_fetch_array($result)) { echo "<p>runid ". $row['runid'] . "\t"; echo "time ".$row['time'] . "\t"; echo "mem ".$row['mem']."\r\n</p>"; } ?>
+>>>>>>> 1e197703015214b72e79044e1a99e5608c84d9d7
 
     </div>
 </div>

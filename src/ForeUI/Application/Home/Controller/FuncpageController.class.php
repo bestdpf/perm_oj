@@ -125,6 +125,24 @@ class FuncPageController extends HomeController {
 	}
 	
 	public function upload_file(){
+		//add textbuffer support
+		if(strlen(trim($_POST['textupl']))!=0){
+				echo "tex area is not 0\n";
+			    $runid=$this->$test_runid;
+                $store_path="/var/www/Test/application/Projects/temp/"; //your store path
+                $src_name=$runid . "upl.cpp";
+                $fileupl=fopen($store_path.$src_name,"r");
+				$text=$_POST['textupl'];
+				file_put_contents($store_path.$src_name,$text);
+				fclose($fileupl);
+				//echo create_xml($runid, $store_path, $src_name);
+                $this->post_host($this->create_xml($runid, $store_path, $src_name));
+                //$this->success('新增成功', U('Index/test'));
+                $this->success('新增成功');
+                $this->$test_runid++;
+		}
+		else{
+		echo "text area is 0\n";
 		$file_name=$_FILES["file"]["name"];
 		$file_type=strstr($file_name,".");
 		
@@ -152,6 +170,7 @@ class FuncPageController extends HomeController {
 		{
 			//echo "Format must be .cpp/.c/.java";
 			$this->error('Format must be .cpp/.c/.java');
+		}
 		}
 	}
 }

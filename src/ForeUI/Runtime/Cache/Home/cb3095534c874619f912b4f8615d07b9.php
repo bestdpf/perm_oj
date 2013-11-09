@@ -159,7 +159,7 @@
 				<p class="lead">中介数：72642321</p>
 			</div>
 			<div class="col-md-5">
-				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+				<iframe src="./Animation/zd2/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 			</div>
 	    </div>
 	    <hr class="featurette-divider">
@@ -173,7 +173,7 @@
 				<p class="lead">4.n位的中介数对应n+1位的排列数.</p>
 			</div>
 			<div class="col-md-5">
-				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+				<iframe src="./Animation/zd3/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 			</div>
 	    </div>
 	    <hr class="featurette-divider">
@@ -187,7 +187,7 @@
 				<p class="lead">4.重复上述步骤.</p>
 			</div>
 			<div class="col-md-5">
-				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive" src="img/zd3.jpg" alt="Generic placeholder image">
 			</div>
 	    </div>
 	    <hr class="featurette-divider">
@@ -199,7 +199,7 @@
 				<p class="lead">2.将各项相加.</p>
 			</div>
 			<div class="col-md-5">
-				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+				<img class="featurette-image img-responsive" src="img/zd4.jpg" alt="Generic placeholder image">
 			</div>
 	    </div>
       	<!-- /END THE FEATURETTES -->
