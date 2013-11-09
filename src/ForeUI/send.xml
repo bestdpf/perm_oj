@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <judge>
-  <runid>1001</runid>
   <storepath>/var/www/Test/application/Projects/temp/</storepath>
-  <srcname>10011.cpp</srcname>
+  <srcname>Array1.cpp</srcname>
 </judge>

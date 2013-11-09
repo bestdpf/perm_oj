@@ -1,0 +1,262 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!--<link rel="shortcut icon" href="/docs-assets/ico/favicon.png"> -->
+
+<title>TAES-Tsinghua Algorithm Evaluation System</title>
+
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.css" rel="stylesheet">
+<!-- Bootstrap theme -->
+<link href="dist/css/bootstrap-theme.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="css/theme.css" rel="stylesheet">
+<link href="css/signin.css" rel="stylesheet">
+<link href="carousel.css" rel="stylesheet">
+<!-- Just for debugging purposes. Don't actually copy this line! -->
+<!--[if lt IE 9]><script src="{{ page.base_url }}docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+<?php echo hook('pageHeader');?>
+
+</head>
+<body>
+	<!-- 头部 -->
+	<!-- 导航条
+================================================== -->
+<!-- Fixed navbar -->
+ <div class="navbar navbar-inverse navbar-fixed-top">
+   <div class="container">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="<?php echo U('Index/main');?>">TAES Bingo!</a>
+     </div>
+     <div class="navbar-collapse collapse">
+       <ul class="nav navbar-nav">
+         <li class="active"><a href="#">Home</a></li>
+         <li><a href="#about">About</a></li>
+         <li><a href="#contact">Contact</a></li>
+         <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+           <ul class="dropdown-menu">
+             <li><a href="#">Action</a></li>
+             <li><a href="#">Another action</a></li>
+             <li><a href="#">Something else here</a></li>
+             <li class="divider"></li>
+             <li class="dropdown-header">Nav header</li>
+             <li><a href="#">Separated link</a></li>
+             <li><a href="#">One more separated link</a></li>
+           </ul>
+         </li>
+       </ul>
+       
+       <?php if(is_login()): ?><ul class="nav navbar-nav navbar-right" style="margin-right:0">
+               <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0"><?php echo get_username();?> <b class="caret"></b></a>
+                   <ul class="dropdown-menu">
+                       <li><a href="<?php echo U('User/profile');?>" style="font-family: '微软雅黑'">修改密码</a></li>
+                       <li><a href="<?php echo U('User/logout');?>" style="font-family: '微软雅黑'">退出</a></li>
+                   </ul>
+               </li>
+           </ul>
+       <?php else: ?>
+           <ul class="nav navbar-nav navbar-right" style="margin-right:0">
+               <li>
+                   <a href="<?php echo U('User/login');?>" style="font-family: '微软雅黑'">登录</a>
+               </li>
+               <li>
+                   <a href="<?php echo U('User/register');?>" style="padding-left:0;padding-right:0;font-family: '微软雅黑'">注册</a>
+               </li>
+           </ul><?php endif; ?>
+     </div><!--/.nav-collapse -->
+   </div><!--container-->
+ </div><!--navbar-->
+
+	<!-- /头部 -->
+	
+	<!-- 主体 -->
+	
+    <header class="jumbotron subhead" id="overview">
+        <div class="container">
+            <h1 style="color: #e53333; font-style: normal;font-weight:bold;">Welcome to TAES</h1>
+            <p class="lead">Built using Bootstrap</p>
+            <ul class="nav nav-pills">
+              <li><a href="<?php echo U('Index/main');?>">Home</a></li>
+              <li class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> ALGORITHM DEMO <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo U('FuncPage/demo-zd');?>" style="font-family: '微软雅黑'">字典序法</a></li>
+                        <li><a href="<?php echo U('FuncPage/demo-zj');?>" style="font-family: '微软雅黑'">递增进位制法</a></li>
+                        <li><a href="<?php echo U('FuncPage/demo-jj');?>" style="font-family: '微软雅黑'">递减进位制法</a></li>
+                        <li><a href="<?php echo U('FuncPage/demo-lh');?>" style="font-family: '微软雅黑'">邻位对换法</a></li>
+                    </ul>
+              </li>
+              <li><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
+              <li><a href="<?php echo U('FuncPage/evaluation');?>">EVALUATION</a></li>
+              <li><a href="<?php echo U('FuncPage/achievement');?>">ACHIEVEMENT</a></li>
+            </ul>
+        </div>
+    </header>
+
+<div id="main-container" class="container">
+    <div class="row">
+        
+        <!-- 左侧 nav
+        ================================================== -->
+            <div class="span3 bs-docs-sidebar">
+                
+                <ul class="nav nav-list bs-docs-sidenav">
+                    <?php echo W('Category/lists', array($category['id'], ACTION_NAME == 'index'));?>
+                </ul>
+            </div>
+        
+        
+	<div class="container marketing">
+		<h1 style="font-family: '微软雅黑'">字典序法</h2>
+		<hr class="featurette-divider">
+		
+		<!-- START THE FEATURETTES -->
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">下一个排列数</h2>
+				<p class="lead">1.先找从右到左第一次出现下降的位置x.</p>
+				<p class="lead">2.找后缀中比x大的最小的数并与x进行交换.</p>
+				<p class="lead">3.将x(new)的后缀整体翻转，即得到下一个排列.</p>
+				
+			</div>
+			<div class="col-md-5">
+				<iframe src="./Animation/zd1/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+				<!-- <img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image"> -->
+				
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">排列数到中介数（and 序号）</h2>
+				<p class="lead">1.从左向右扫描，找出先于此排列的排列的个数.</p>
+				<p class="lead">2.如对839647521求中介数：</p>
+				<p class="lead">***前缀先于8的排列的个数：7×8!</p>	
+				<p class="lead">***第一位是8,先于83的排列的个数：2×7!</p>	
+				<p class="lead">***前2位是83,先于839的排列的个数：6×6!</p>	
+				<p class="lead">***前3位是839,先于8396得的排列的个数：4×5! ……</p>			
+				<p class="lead">序号：7×8!+2×7!+6×6!+4×5!+2×4!+3×3!+2×2!+1×1!=297191</p>
+				<p class="lead">中介数：72642321</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到排列数</h2>
+				<p class="lead">1.从左向右按位扫描中介数xi，xi+1为对应位上的排列数.</p>
+				<p class="lead">2.如果xi+1已经在左侧出现，则再加1.</p>
+				<p class="lead">3.重复第二步直至没有在左侧找到相同的数.</p>
+				<p class="lead">4.n位的中介数对应n+1位的排列数.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">序号到中介数</h2>
+				<p class="lead">1.对于n+1位的排列数，有n位的中介数.</p>
+				<p class="lead">2.从n!开始找出满足x*n!<排列数<(x+1)*n!的最大x.</p>
+				<p class="lead">3.从中介数中减去x*n!，计算满足x*(n-1)!<排列数<(x+1)*(n-1)!的最大x.</p>
+				<p class="lead">4.重复上述步骤.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+		<div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到序号</h2>
+				<p class="lead">1.按位乘以n!、(n-1)!、(n-2)!……</p>
+				<p class="lead">2.将各项相加.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="data:image/png;base64," data-src="holder.js/480x320/auto" alt="Generic placeholder image">
+			</div>
+	    </div>
+      	<!-- /END THE FEATURETTES -->
+	</div>
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	<p></p>
+
+<div class="container">
+    <!-- FOOTER -->
+    <hr class="featurette-divider">
+    <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p class="text-muted credit">本站由 <a href="http://www.bootcss.com/">Bootstrap</a> 及 <a href="http://www.thinkphp.cn/">ThinkPHP</a> 强力驱动.</p>
+    </footer>
+</div>
+
+
+<script type="text/javascript">
+(function(){
+	var ThinkPHP = window.Think = {
+		"ROOT"   : "", //当前网站地址
+		"APP"    : "/index.php?s=", //当前项目地址
+		"PUBLIC" : "/Public", //项目公共目录地址
+		"DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
+		"MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
+		"VAR"    : ["<?php echo C('VAR_MODULE');?>", "<?php echo C('VAR_CONTROLLER');?>", "<?php echo C('VAR_ACTION');?>"]
+	}
+})();
+</script>
+ <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+<?php echo hook('pageFooter', 'widget');?>
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+	
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="js/holder.js"></script>
+
+	<!-- /底部 -->
+</body>
+</html>
