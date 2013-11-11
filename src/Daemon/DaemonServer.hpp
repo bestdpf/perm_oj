@@ -80,7 +80,10 @@ namespace Daemon{
 				nd.append_child("TLE").append_child(node_pcdata).set_value(to_string(jr.usg._tle).c_str());
 				nd.append_child("MLE").append_child(node_pcdata).set_value(to_string(jr.usg._mle).c_str());
 				nd.append_child("outpath").append_child(node_pcdata).set_value((runnablepath+"1.out").c_str());
-				JudgeInfo ji=jer->getRet();
+				JudgeInfo ji;
+				if(jer!=NULL){
+					ji=jer->getRet();
+				}
 				nd.append_child("judgercorrect").append_child(node_pcdata).set_value(to_string(ji.correct).c_str());
 				nd.append_child("judgererrtype").append_child(node_pcdata).set_value(to_string(ji.err_type).c_str());
 				#if _DEBUG

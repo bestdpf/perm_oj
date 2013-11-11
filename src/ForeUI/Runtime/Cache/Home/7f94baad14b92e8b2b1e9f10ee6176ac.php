@@ -127,14 +127,14 @@
         
 <div class='container' style="color: #e53300 font-style: normal">
 	<?php
- $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge ORDER by runid DESC",$con); echo "<table border='1' width='1200'>
+ $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge ORDER by runid DESC",$con); echo "<table class='table table-hover table-striped'>
 	<tr>
-	<th>runid</th>
-	<th>usr</th>
-	<th>ret</th>
-	<th>time</th>
-	<th>mem</th>
-	</tr>"; while($row = mysql_fetch_array($result)) { echo "<tr align='center'>"; echo "<td>".$row['runid']."</td>"; echo "<td>"."test name"."</td>"; echo "<td>"; if($row['compilecode']!=0){ echo "Compile Error"; } else if($row['RE']!=0){ echo "Runtime Error"; } else if($row['TLE']!=0){ echo "Time Limit Extend"; } else if($row['MLE']!=0){ echo "Memory Limit Extend"; } else if ($row['judgercorrect']!=0){ if($row['judgererrtype']==1){ echo "Less Result"; } else if ($row['judgererrtype']==2){ echo "Dumplicate Result"; } else{ echo "Seqence Error"; } } else { echo "Perfect Code"; } echo "</td>"; echo "<td>".$row['time']."ms</td>"; echo "<td>".$row['mem']."KB</td>"; echo "</tr>"; } ?>
+	<th class='text-center'>runid</th>
+	<th class='text-center'>usr</th>
+	<th class='text-center'>ret</th>
+	<th class='text-center'>time</th>
+	<th class='text-center'>mem</th>
+	</tr>"; while($row = mysql_fetch_array($result)) { echo "<tr align='center'>"; echo "<td>".$row['runid']."</td>"; echo "<td>"."test name"."</td>"; echo "<td>"; if($row['compilecode']!=0){ echo "Compile Error"; } else if($row['RE']!=0){ echo "Runtime Error"; } else if($row['TLE']!=0){ echo "Time Limit Extend"; } else if($row['MLE']!=0){ echo "Memory Limit Extend"; } else if ($row['judgercorrect']!=0){ if($row['judgererrtype']==1){ echo "Less Result"; } else if ($row['judgererrtype']==2){ echo "Dumplicate Result"; } else{ echo "Seqence Error"; } } else { echo "Perfect Code"; } echo "</td>"; echo "<td>".$row['time']."ms</td>"; echo "<td>".$row['mem']."KB</td>"; echo "</tr>"; } echo "</table>"; ?>
 </div>
 
     </div>

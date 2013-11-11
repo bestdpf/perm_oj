@@ -29,5 +29,22 @@ int get_proc_status(int pid, const char * mark) {
                 fclose(pf);
         return ret;
 }
+//get first child proc
+//return -1 if not got
+int get_child_pid(int fa_pid){
+	char cmd[BUFFER_SIZE];
+	int ret=-1;
+	sprintf(cmd,"ps -ax --format '%%P %%p'|awk -vFA=%d -F ' ' '$1==FA {print $2}'",fa_pid);
+	FILE *fp=popen(cmd,"r");
+	if(fp==NULL)ret=-1;
+	else while(fscanf(fp,"%d",&ret)!=EOF){
+		#if _DEBUG
+		printf("%d get child pid %d\n",fa_pid,ret);
+		#endif
+		break;
+	}
+	fclose(fp);
+	return ret;
+}
 }//end of Daemon
 #endif

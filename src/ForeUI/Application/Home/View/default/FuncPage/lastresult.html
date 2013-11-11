@@ -32,13 +32,13 @@
 		die("could not connect：" . mysql_error());
 	mysql_select_db("judge",$con);
 	$result = mysql_query("SELECT * FROM judge ORDER by runid DESC",$con);
-	echo "<table border='1' width='1200'>
+	echo "<table class='table table-hover table-striped'>
 	<tr>
-	<th>runid</th>
-	<th>usr</th>
-	<th>ret</th>
-	<th>time</th>
-	<th>mem</th>
+	<th class='text-center'>runid</th>
+	<th class='text-center'>usr</th>
+	<th class='text-center'>ret</th>
+	<th class='text-center'>time</th>
+	<th class='text-center'>mem</th>
 	</tr>";
 	while($row = mysql_fetch_array($result))
 	{
@@ -77,6 +77,7 @@
 		echo "<td>".$row['mem']."KB</td>";
 		echo "</tr>";
 	}
-	?>
+echo "</table>";
+?>
 </div>
 </block>

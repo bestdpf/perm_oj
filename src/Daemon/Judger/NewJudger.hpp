@@ -12,6 +12,10 @@ namespace Daemon{
 	struct JudgeInfo{
 		int correct;//0 is correct,1 is not
 		int err_type;//0 is no err, 1 is less, 2 is duplicate, 3 is err perm
+		JudgeInfo(){
+			correct=0;
+			err_type=0;
+		}
 	};
 	class NewJudger{
 		private:
