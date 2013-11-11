@@ -19,4 +19,4 @@ open http://127.0.0.1 in your browser, and enjoy it!!!
 
 
 Report Bugs:
-the software is still under tested now, so if you have any questions email to pengfeituan@gmail.com
+the software is still under tested now, so if you have any questions email to pengfeituan at gmail dot com
