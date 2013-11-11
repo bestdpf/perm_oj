@@ -40,7 +40,11 @@
 	<th>mem</th>
 	</tr>";
 	while($row = mysql_fetch_array($result))
-	{
+	if($row['compilecode']==0&&
+		$row['RE']==0&&
+		$row['TLE']==0&&
+		$row['MLE']==0&&
+		$row['judgercorrect']==0){
 		echo "<tr align='center'>";
 		echo "<td>".$row['runid']."</td>";
 		echo "<td>"."test name"."</td>";
