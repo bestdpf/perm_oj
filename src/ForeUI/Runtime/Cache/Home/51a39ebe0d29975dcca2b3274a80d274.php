@@ -105,8 +105,8 @@
                         <li><a href="<?php echo U('FuncPage/demo-lh');?>" style="font-family: '微软雅黑'">邻位对换法</a></li>
                     </ul>
               </li>
-              <li><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
-              <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">EVALUATION</a></li>
+              <li class="active"><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
+              <li><a href="<?php echo U('FuncPage/evaluation');?>">EVALUATION</a></li>
               <li><a href="<?php echo U('FuncPage/achievement');?>">ACHIEVEMENT</a></li>
             </ul>
         </div>
@@ -125,23 +125,15 @@
             </div>
         
         
-<div class='container' style="color: #e53300 font-style: normal">
-	<ul class="nav nav-tabs">
-	  <li><a href="<?php echo U('FuncPage/evaluation');?>">代码提交</a></li>
-	  <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">评测结果</a></li>
-	</ul>
-	<p></p>
-	<div class='container' style="color: #e53300 font-style: normal">
-		<?php
- $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge ORDER by runid DESC",$con); echo "<table class='table table-hover table-striped'>
-		<tr>
-		<th class='text-center'>runid</th>
-		<th class='text-center'>usr</th>
-		<th class='text-center'>ret</th>
-		<th class='text-center'>time</th>
-		<th class='text-center'>mem</th>
-		</tr>"; while($row = mysql_fetch_array($result)) { echo "<tr align='center'>"; echo "<td>".$row['runid']."</td>"; echo "<td>"."test name"."</td>"; echo "<td"; if($row['compilecode']!=0){ echo " class='lable lable-danger'>Compile Error"; } else if($row['RE']!=0){ echo " class='danger'>Runtime Error"; } else if($row['TLE']!=0){ echo " class='warning'>Time Limit Extend"; } else if($row['MLE']!=0){ echo " class='warning'>Memory Limit Extend"; } else if ($row['judgercorrect']!=0){ if($row['judgererrtype']==1){ echo " class='danger'>Less Result"; } else if ($row['judgererrtype']==2){ echo " class='danger'>Dumplicate Result"; } else{ echo " class='danger'>Seqence Error"; } } else { echo " class='success'><span class='glyphicon glyphicon-thumbs-up'></span> Perfect Code"; } echo "</td>"; echo "<td>".$row['time']."ms</td>"; echo "<td>".$row['mem']."KB</td>"; echo "</tr>"; } echo "</table>"; ?>
-</div>
+<?php
+ $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge ORDER by time ASC, mem ASC, runid DESC LIMIT 10",$con); echo "<table class='table table-hover table-striped'>
+	<tr>
+	<th class='text-center'>runid</th>
+	<th class='text-center'>usr</th>
+	<th class='text-center'>ret</th>
+	<th class='text-center'>time</th>
+	<th class='text-center'>mem</th>
+	</tr>"; while($row = mysql_fetch_array($result)) if($row['compilecode']==0&& $row['RE']==0&& $row['TLE']==0&& $row['MLE']==0&& $row['judgercorrect']==0){ echo "<tr align='center'>"; echo "<td>".$row['runid']."</td>"; echo "<td>"."test name"."</td>"; echo "<td>"; if($row['compilecode']!=0){ echo "Compile Error"; } else if($row['RE']!=0){ echo "Runtime Error"; } else if($row['TLE']!=0){ echo "Time Limit Extend"; } else if($row['MLE']!=0){ echo "Memory Limit Extend"; } else if ($row['judgercorrect']!=0){ if($row['judgererrtype']==1){ echo "Less Result"; } else if ($row['judgererrtype']==2){ echo "Dumplicate Result"; } else{ echo "Seqence Error"; } } else { echo "Perfect Code"; } echo "</td>"; echo "<td>".$row['time']."ms</td>"; echo "<td>".$row['mem']."KB</td>"; echo "</tr>"; } echo "</table>"; ?>
 
     </div>
 </div>

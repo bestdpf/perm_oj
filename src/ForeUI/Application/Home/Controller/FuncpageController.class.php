@@ -10,6 +10,7 @@ namespace Home\Controller;
 class FuncPageController extends HomeController {
 	
 /* 用户中心首页 */
+	public $test_runid=1000;
 	public function index(){
 		$this->check_sql();
 		$this->read_lastre_from_sql();
@@ -138,7 +139,7 @@ class FuncPageController extends HomeController {
 				//echo create_xml($runid, $store_path, $src_name);
                 $this->post_host($this->create_xml($runid, $store_path, $src_name));
                 //$this->success('新增成功', U('Index/test'));
-                $this->success('新增成功');
+                $this->success('新增成功',U('FuncPage/lastresult'));
                 $this->$test_runid++;
 		}
 		else{
@@ -162,7 +163,7 @@ class FuncPageController extends HomeController {
 				//echo create_xml($runid, $store_path, $src_name);
 				$this->post_host($this->create_xml($runid, $store_path, $src_name));
 				//$this->success('新增成功', U('Index/test'));
-				$this->success('新增成功');
+                $this->success('新增成功',U('FuncPage/lastresult'));
 				$this->$test_runid++;
 			}
 		}

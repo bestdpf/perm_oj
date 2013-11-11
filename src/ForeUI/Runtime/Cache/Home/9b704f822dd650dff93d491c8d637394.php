@@ -90,58 +90,67 @@
 	
 	<!-- 主体 -->
 	
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-            <h1 style="color: #e53333; font-style: normal;font-weight:bold;">Welcome to TAES</h1>
-            <p class="lead">Built using Bootstrap</p>
-            <ul class="nav nav-pills">
-              <li><a href="<?php echo U('Index/main');?>">Home</a></li>
-              <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> ALGORITHM DEMO <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<?php echo U('FuncPage/demo-zd');?>" style="font-family: '微软雅黑'">字典序法</a></li>
-                        <li><a href="<?php echo U('FuncPage/demo-zj');?>" style="font-family: '微软雅黑'">递增进位制法</a></li>
-                        <li><a href="<?php echo U('FuncPage/demo-jj');?>" style="font-family: '微软雅黑'">递减进位制法</a></li>
-                        <li><a href="<?php echo U('FuncPage/demo-lh');?>" style="font-family: '微软雅黑'">邻位对换法</a></li>
-                    </ul>
-              </li>
-              <li><a href="<?php echo U('FuncPage/ranking');?>">RANKING</a></li>
-              <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">EVALUATION</a></li>
-              <li><a href="<?php echo U('FuncPage/achievement');?>">ACHIEVEMENT</a></li>
-            </ul>
-        </div>
-    </header>
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h2>用户注册</h2>
+    <p><span><span class="pull-left"><span>已经有账号? <a href="<?php echo U('Index/index');?>">点此登录</a> </span> </span></p>
+  </div>
+</header>
 
 <div id="main-container" class="container">
     <div class="row">
+         
         
-        <!-- 左侧 nav
-        ================================================== -->
-            <div class="span3 bs-docs-sidebar">
-                
-                <ul class="nav nav-list bs-docs-sidenav">
-                    <?php echo W('Category/lists', array($category['id'], ACTION_NAME == 'index'));?>
-                </ul>
+
+<section>
+	<div class="span12">
+        <form class="login-form" action="/index.php?s=/home/user/register.html" method="post">
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">用户名</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
             </div>
-        
-        
-<div class='container' style="color: #e53300 font-style: normal">
-	<ul class="nav nav-tabs">
-	  <li><a href="<?php echo U('FuncPage/evaluation');?>">代码提交</a></li>
-	  <li class="active"><a href="<?php echo U('FuncPage/lastresult');?>">评测结果</a></li>
-	</ul>
-	<p></p>
-	<div class='container' style="color: #e53300 font-style: normal">
-		<?php
- $con=mysql_connect("localhost","root","6432114"); if(! $con) die("could not connect：" . mysql_error()); mysql_select_db("judge",$con); $result = mysql_query("SELECT * FROM judge ORDER by runid DESC",$con); echo "<table class='table table-hover table-striped'>
-		<tr>
-		<th class='text-center'>runid</th>
-		<th class='text-center'>usr</th>
-		<th class='text-center'>ret</th>
-		<th class='text-center'>time</th>
-		<th class='text-center'>mem</th>
-		</tr>"; while($row = mysql_fetch_array($result)) { echo "<tr align='center'>"; echo "<td>".$row['runid']."</td>"; echo "<td>"."test name"."</td>"; echo "<td"; if($row['compilecode']!=0){ echo " class='lable lable-danger'>Compile Error"; } else if($row['RE']!=0){ echo " class='danger'>Runtime Error"; } else if($row['TLE']!=0){ echo " class='warning'>Time Limit Extend"; } else if($row['MLE']!=0){ echo " class='warning'>Memory Limit Extend"; } else if ($row['judgercorrect']!=0){ if($row['judgererrtype']==1){ echo " class='danger'>Less Result"; } else if ($row['judgererrtype']==2){ echo " class='danger'>Dumplicate Result"; } else{ echo " class='danger'>Seqence Error"; } } else { echo " class='success'><span class='glyphicon glyphicon-thumbs-up'></span> Perfect Code"; } echo "</td>"; echo "<td>".$row['time']."ms</td>"; echo "<td>".$row['mem']."KB</td>"; echo "</tr>"; } echo "</table>"; ?>
-</div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">密码</label>
+            <div class="controls">
+              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">确认密码</label>
+            <div class="controls">
+              <input type="password" id="inputPassword" class="span3" placeholder="请再次输入密码" recheck="password" errormsg="您两次输入的密码不一致" nullmsg="请填确认密码" datatype="*" name="repassword">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">邮箱</label>
+            <div class="controls">
+              <input type="text" id="inputEmail" class="span3" placeholder="请输入电子邮件"  ajaxurl="/member/checkUserEmailUnique.html" errormsg="请填写正确格式的邮箱" nullmsg="请填写邮箱" datatype="e" value="" name="email">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">验证码</label>
+            <div class="controls">
+              <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <img class="verifyimg reloadverify" alt="点击切换" src="<?php echo U('verify');?>" style="cursor:pointer;">
+            </div>
+            <div class="controls Validform_checktip text-warning"></div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">注 册</button>
+            </div>
+          </div>
+        </form>
+	</div>
+</section>
+
 
     </div>
 </div>
@@ -180,6 +189,44 @@
 	}
 })();
 </script>
+
+	<script type="text/javascript">
+    	$(document)
+	    	.ajaxStart(function(){
+	    		$("button:submit").addClass("log-in").attr("disabled", true);
+	    	})
+	    	.ajaxStop(function(){
+	    		$("button:submit").removeClass("log-in").attr("disabled", false);
+	    	});
+
+
+    	$("form").submit(function(){
+    		var self = $(this);
+    		$.post(self.attr("action"), self.serialize(), success, "json");
+    		return false;
+
+    		function success(data){
+    			if(data.status){
+    				window.location.href = data.url;
+    			} else {
+    				self.find(".Validform_checktip").text(data.info);
+    				//刷新验证码
+    				$(".reloadverify").click();
+    			}
+    		}
+    	});
+
+		$(function(){
+			var verifyimg = $(".verifyimg").attr("src");
+            $(".reloadverify").click(function(){
+                if( verifyimg.indexOf('?')>0){
+                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                }else{
+                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                }
+            });
+		});
+	</script>
  <!-- 用于加载js代码 -->
 <!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
 <?php echo hook('pageFooter', 'widget');?>

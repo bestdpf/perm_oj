@@ -22,7 +22,6 @@ class HomeController extends Controller {
 	// }
 	// TODO: 为了调试方便，暂时注释
 
-	public $test_runid=1000;
     protected function _initialize(){
         /* 读取站点配置 */
         $config = D('Config')->lists();

@@ -70,6 +70,7 @@ namespace Daemon{
 				int tCnt=0;
 				int vmSize=16;
 				int tmpSize=0;
+				int chpid=get_child_pid(0);
 				while(!isExecDone){
 					//nanosleep(&t16m,&tres);
 					//tCnt++;
@@ -79,7 +80,7 @@ namespace Daemon{
 						break;
 					}
 					//tmpSize=get_proc_status(getpid(),"VmSize")-get_proc_status(getpid(),"VmLib")-_initMem;
-					tmpSize=get_proc_status(get_child_pid(getpid()),"VmPeak");
+					tmpSize=get_proc_status(chpid,"VmSize")-12424;
 					#if _DEBUG
 					cout<<"tmpSize "<<tmpSize<<endl;
 					cout<<"_initMem "<<_initMem<<endl;
@@ -90,6 +91,8 @@ namespace Daemon{
 						cout<<"MLE ie. extends 32MB!"<<endl;
 						break;
 					}
+					nanosleep(&t16m,&tres);
+					tCnt++;
 				}
 				cout<<"Time Usage is "<<16*tCnt<<"ms"<<endl;
 				cout<<"Mem Usage is "<<vmSize<<"KB"<<endl;
@@ -97,8 +100,6 @@ namespace Daemon{
 				_resrc._timeUsage=16*tCnt;
 				_resrc._memUsage=vmSize;
 				isExecDone=false;
-				nanosleep(&t16m,&tres);
-				tCnt++;
 			}
 			
 	};//end of class RunanbleLanucher
