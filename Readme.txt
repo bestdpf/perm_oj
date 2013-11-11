@@ -13,7 +13,7 @@ go to the src/Daemon to complie daemon just run
 in the shell
 3) Deployment:
 point your apache document root to the dir you place the ForeUI dir
-and import the sql file in ForeUI
+and import the sql files in src/ForeUI and change the passwd of root in mysql
 run the ./debug or ./release in src/Daemon dir
 3) Lanuch
 open http://127.0.0.1 in your browser, and enjoy it!!!
