@@ -25,5 +25,66 @@
 </block>
 
 <block name="body">
+	<div class="container marketing">
+		<h1 style="font-family: '微软雅黑'">递增进位制法</h2>
+		<hr class="featurette-divider">
+		
+		<!-- START THE FEATURETTES -->
+	    <div class="row featurette">
+			<div class="col-md-10">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">下一个排列数</h2>
+				<p class="lead">1.在中介数的基础上进行递增进位制的加1操作.</p>
+				<p class="lead">2.将新的中介数还原成排列数.</p>		
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">排列数到中介数（and 序号）</h2>
+				<p class="lead">1.从2开始计算2右边比2小的数的个数，作为a2.</p>
+				<p class="lead">2.重复上一步，得到a2~an.</p>
+				<p class="lead">3.中介数即为：an an-1 an-2……a2.</p>	
+			</div>
+			<div class="col-md-5">
+				<iframe src="./Animation/zj1/index.html"  width="480" height="320" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-12">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到排列数</h2>
+				<p class="lead">空出n位，从a2开始，将各个数按照要求填入即可.</p>
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+	    <div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">序号到中介数</h2>
+				<p class="lead">1.对于n+1位的排列数，有n位的中介数.</p>
+				<p class="lead">2.从n!开始找出满足x*n!<排列数<(x+1)*n!的最大x.</p>
+				<p class="lead">3.从中介数中减去x*n!，计算满足x*(n-1)!<排列数<(x+1)*(n-1)!的最大x.</p>
+				<p class="lead">4.重复上述步骤.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="img/zd3.jpg" alt="Generic placeholder image">
+			</div>
+	    </div>
+	    <hr class="featurette-divider">
+	    
+		<div class="row featurette">
+			<div class="col-md-7">
+				<h2 class="featurette-heading" style="font-family: '微软雅黑'">中介数到序号</h2>
+				<p class="lead">1.按位乘以n!、(n-1)!、(n-2)!……</p>
+				<p class="lead">2.将各项相加.</p>
+			</div>
+			<div class="col-md-5">
+				<img class="featurette-image img-responsive" src="img/zd4.jpg" alt="Generic placeholder image">
+			</div>
+	    </div>
+      	<!-- /END THE FEATURETTES -->
+	</div>
 
 </block>
