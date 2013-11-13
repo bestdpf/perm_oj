@@ -29,6 +29,7 @@ namespace Daemon{
 			int timeLimit;//8sec
 			int memLimit;//32MB;
 			bool isExecDone;
+			int _initMem;
 		public:
 			RunnableLanucher(string runnablePath,string inputPath,string outputPath){
 				_runPath=runnablePath;
@@ -45,6 +46,7 @@ namespace Daemon{
 			Usage run(){
 				thread_group tg;
 				thread *th1,*th2;
+				//_initMem=get_proc_status(getpid(),"VmPeak");
 				th1=new thread(bind(&RunnableLanucher::execThread,this));
 				th2=new thread(bind(&RunnableLanucher::resrcThread,this));
 				tg.add_thread(th1);
@@ -54,7 +56,8 @@ namespace Daemon{
 			}
 			void execThread(){
 				isExecDone=false;
-				string cmd=_runPath+" <"+_inPath+" >"+_outPath;
+				//_initMem=get_proc_status(getpid(),"VmSize")-get_proc_status(getpid(),"VmLib");
+				string cmd="busybox sh -c "+_runPath+" <"+_inPath+" >"+_outPath;
 			//	FILE* fin=popen(cmd.c_str(),"r");
 				int sysret=std::system(cmd.c_str());
 				if(sysret!=0){
@@ -65,15 +68,23 @@ namespace Daemon{
 			}
 			void resrcThread(){
 				int tCnt=0;
-				int vmSize=0;
+				int vmSize=16;
 				int tmpSize=0;
+				int chpid=get_child_pid(0);
 				while(!isExecDone){
+					//nanosleep(&t16m,&tres);
+					//tCnt++;
 					if(tCnt>500){
 						_resrc._tle=1;
 						cout<<"TLE ie. extends 8secs!"<<endl;
 						break;
 					}
-					tmpSize=get_proc_status(getpid(),"VmHWM");
+					//tmpSize=get_proc_status(getpid(),"VmSize")-get_proc_status(getpid(),"VmLib")-_initMem;
+					tmpSize=get_proc_status(chpid,"VmSize")-12424;
+					#if _DEBUG
+					cout<<"tmpSize "<<tmpSize<<endl;
+					cout<<"_initMem "<<_initMem<<endl;
+					#endif
 					if(vmSize<tmpSize)vmSize=tmpSize;
 					if((tmpSize)>memLimit){
 						_resrc._mle=1;

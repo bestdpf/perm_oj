@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <judge>
   <storepath>/var/www/Test/application/Projects/temp/</storepath>
-  <srcname>Array1.cpp</srcname>
+  <srcname>Arraymem.cpp</srcname>
 </judge>
