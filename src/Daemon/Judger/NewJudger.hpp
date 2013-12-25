@@ -1,11 +1,12 @@
-#ifndef _JUDGER
-#define _JUDGER
+#ifndef _NEW_JUDGER
+#define _NEW_JUDGER
 #include<string>
 #include<cstring>
 #include<iostream>
 #include<cstdio>
 
 #define _N 10000000
+
 #define _M 15
 using namespace std;
 namespace Daemon{
@@ -60,11 +61,16 @@ namespace Daemon{
 			void run(){
 				#if _DEBUG
 				cout<<"Running Judge now"<<endl;
+				clock_t begin,end;
+				double time_spent;
 				#endif
 				memset(vis,0,sizeof(vis));
 				char str[_M+5];
 				FILE* fr=fopen(data.c_str(),"r");
 				unsigned long long int line=0;
+				#if _DEBUG
+				begin=clock();
+				#endif
 				while(fscanf(fr,"%s",str)!=EOF){
 					line++;
 					int i,r=0;
@@ -109,6 +115,11 @@ namespace Daemon{
 					cout<<"err type 1"<<endl;
 					#endif
 				}
+				#if _DEBUG
+				end=clock();
+				time_spent=(end-begin)*1000/CLOCKS_PER_SEC;
+				cout<<time_spent<<endl;
+				#endif
 			}//end of class Judger
 	};
 }//end of Daemon namespace
